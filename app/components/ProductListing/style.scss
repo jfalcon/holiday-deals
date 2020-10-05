@@ -1,0 +1,39 @@
+@import '../../variables'; // order is important
+@import '~bootstrap/scss/functions'; // order is important
+@import '~bootstrap/scss/variables'; // order is important
+
+// we use the same name as the component as a wrapper to to avoid a namespace collision
+.product-listing {
+  .flush {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .product-item {
+    background-color: rgba(white, 0.6);
+    margin-bottom: ($grid-gutter-width / 2); // this is a bootstrap variable
+
+    .product-image {
+      position: relative;
+
+      .product-price {
+        border-radius: $btn-border-radius; // this is a bootstrap variable
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: color-yiq($secondary); // this is a bootstrap function
+        background-color: $secondary; // this is a bootstrap variable
+        padding: 0.5rem 1rem;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+      }
+    }
+
+    &:hover,
+    &:active {
+      -webkit-box-shadow: 0 3px 7px 0 #a8a8a8;
+      -moz-box-shadow: 0 3px 7px 0 #a8a8a8;
+      box-shadow: 0 3px 7px 0 #a8a8a8;
+    }
+  }
+}

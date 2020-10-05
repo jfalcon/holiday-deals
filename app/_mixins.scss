@@ -1,0 +1,50 @@
+@mixin image-background($image: null, $backgroundColor: null, $repeat: false) {
+  // values must be set individually in case CSS variables aren't supported or there are issues with CSS
+  // variables not being supported when using a style's shorthand, such as the case with Safari mobile
+  background-color: if($backgroundColor, $backgroundColor, transparent);
+
+  @if ($repeat) {
+    background-position: top left;
+    background-repeat: repeat;
+  } @else {
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  // allow no image to be set in case the caller prefers setting it via script, etc.
+  @if $image and (type-of($image) == string) {
+    @if (str-index($image, 'var(')) {
+      background-image: $image;
+    } @else {
+      background-image: url('#{$path-images}#{$image}');
+    }
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@mixin banner-background($image: null, $backgroundColor: null, $repeat: false) {
+  @include image-background($image, $backgroundColor, $repeat);
+
+  @if ($repeat) {
+    background-size: auto;
+  } @else {
+    background-size: cover;
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@mixin fixed-background($image: null, $backgroundColor: null, $device: false) {
+  @include banner-background($image, $backgroundColor);
+  background-attachment: fixed;
+
+  // styles specific to mobile devices
+  @if ($device) {
+    background-attachment: scroll;
+    background-repeat: repeat;
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

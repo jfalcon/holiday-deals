@@ -1,0 +1,9 @@
+// bootstrap customizations
+$primary: #014c8d;
+$secondary: #1ab394;
+
+// internal paths
+$path-images: 'assets/';
+
+// external paths (we override this to avoid having to copy over font files to the project directory)
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
